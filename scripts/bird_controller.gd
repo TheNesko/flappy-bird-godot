@@ -10,12 +10,16 @@ var alive = true
 signal has_died
 signal point_collected
 
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("jump") and alive:
+		jump()
+
+func jump():
+	velocity.y = -JUMP_POWER
+	$Sprite.rotation = JUMP_ROTATION
+
 func move():
 	velocity.y += GRAVITY
-	if Input.is_action_just_pressed("jump") and alive:
-		velocity.y = -JUMP_POWER
-		$Sprite.rotation = JUMP_ROTATION
-	#velocity.y = clamp(velocity.y,-MAX_SPEED,MAX_SPEED)
 	move_and_slide()
 	if velocity.y >= 0:
 		$Sprite.rotation += ROTATION_SPEED

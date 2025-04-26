@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmb6xkarwghvk"]
+[gd_scene load_steps=7 format=3 uid="uid://cmb6xkarwghvk"]
 
 [ext_resource type="Script" uid="uid://dxv5qxm4mi777" path="res://scripts/game.gd" id="1_w5aja"]
+[ext_resource type="Shader" uid="uid://c500y6gfes6ja" path="res://ground_scroll.gdshader" id="2_bw6k5"]
 [ext_resource type="Texture2D" uid="uid://dlvv0x44abkly" path="res://sprites/base.png" id="2_onqr8"]
 [ext_resource type="Texture2D" uid="uid://ci5rbnp1yw7vo" path="res://sprites/background-day.png" id="3_ycayy"]
 
 [sub_resource type="SystemFont" id="SystemFont_w5aja"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3j0m"]
+shader = ExtResource("2_bw6k5")
+shader_parameter/paused = true
+shader_parameter/speed = 0.9
 
 [node name="GameScene" type="Node"]
 script = ExtResource("1_w5aja")
@@ -36,6 +42,7 @@ vertical_alignment = 1
 
 [node name="ground" type="TextureRect" parent="."]
 texture_repeat = 2
+material = SubResource("ShaderMaterial_y3j0m")
 offset_left = -39.0
 offset_top = 607.0
 offset_right = 1220.0
@@ -56,3 +63,71 @@ grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_ycayy")
 stretch_mode = 1
+
+[node name="press_to_start" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "Press space to start"
+
+[node name="final_screen" type="Panel" parent="."]
+visible = false
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 440.0
+offset_top = 162.0
+offset_right = -440.0
+offset_bottom = -162.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="container" type="VBoxContainer" parent="final_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="score" type="Label" parent="final_screen/container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "score
+69"
+horizontal_alignment = 1
+
+[node name="best_score" type="Label" parent="final_screen/container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 40
+text = "highscore
+69"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="final_screen/container"]
+layout_mode = 2
+theme_override_constants/outline_size = 15
+theme_override_font_sizes/font_size = 30
+text = "Main Menu"
+
+[connection signal="button_down" from="final_screen/container/Button" to="." method="_on_button_button_down"]

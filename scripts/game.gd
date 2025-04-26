@@ -2,10 +2,10 @@ extends Node
 
 @onready var window_height = ProjectSettings.get_setting("display/window/size/viewport_height")
 
-@onready var pipes_scene = preload("res://pipes.tscn")
+@onready var pipes_scene = preload("res://entities/pipes.tscn")
 var pipes_array = []
 
-@onready var bird_scene = preload("res://bird.tscn")
+@onready var bird_scene = preload("res://entities/bird.tscn")
 @onready var bird = null
 
 var score = 0
@@ -21,11 +21,13 @@ func _ready() -> void:
 	bird.point_collected.connect(add_point)
 
 func _physics_process(_delta: float) -> void:
-	if paused and Input.is_action_just_pressed("jump"):
+	$press_to_start.visible = true if paused and bird.alive else false
+	if paused and Input.is_action_just_released("jump"):
 		if bird.alive == false:
-			get_tree().reload_current_scene()
+			get_parent().change_scene("game")
 		paused = false
 		bird.get_node("Sprite").play("flop")
+		$ground.material.set_shader_parameter("paused",false)
 		return
 	if paused: return
 	bird.move()
@@ -51,8 +53,21 @@ func spawn_pipes():
 
 func pause():
 	paused = true
+	$ground.material.set_shader_parameter("paused",true)
 	bird.get_node("Sprite").pause()
+	$final_screen/container/score.text = "Score\n" + String.num_int64(score)
+	if score > Highscore.highscore:
+		Highscore.highscore = score
+		$final_screen/container/best_score.text = "Highscore\n" + String.num_int64(score)
+	else:
+		$final_screen/container/best_score.text = "Highscore\n" + String.num_int64(Highscore.highscore)
+	$final_screen.visible = true
+	$score.visible = false
 
 func add_point():
 	score += 1
 	$score.text = String.num_int64(score)
+
+
+func _on_button_button_down() -> void:
+	get_parent().change_scene("menu")
