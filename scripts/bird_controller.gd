@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 const JUMP_POWER : int = 600
 const GRAVITY : int = 40
-#const MAX_SPEED : int = 2000
 const JUMP_ROTATION = deg_to_rad(-30)
 const ROTATION_SPEED = deg_to_rad(3)
 
@@ -26,7 +25,7 @@ func move():
 		if $Sprite.rotation_degrees >= 90: $Sprite.rotation_degrees = 90
 	if not alive:
 		return
-	if position.y <= 0 or position.y >= get_parent().get_node("ground").position.y:
+	if position.y <= 0 or position.y >= get_parent().find_child("ground").position.y:
 		alive = false
 		velocity.y = 0
 		has_died.emit()
