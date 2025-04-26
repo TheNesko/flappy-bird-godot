@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmb6xkarwghvk"]
+
+[ext_resource type="Script" uid="uid://dxv5qxm4mi777" path="res://game.gd" id="1_w5aja"]
+[ext_resource type="Texture2D" uid="uid://dlvv0x44abkly" path="res://sprites/base.png" id="2_onqr8"]
+[ext_resource type="Texture2D" uid="uid://ci5rbnp1yw7vo" path="res://sprites/background-day.png" id="3_ycayy"]
+
+[sub_resource type="SystemFont" id="SystemFont_w5aja"]
+
+[node name="GameScene" type="Node"]
+script = ExtResource("1_w5aja")
+
+[node name="bird_spawn" type="Marker2D" parent="."]
+position = Vector2(172, 325)
+
+[node name="pipes_spawn" type="Marker2D" parent="."]
+position = Vector2(1278, 325)
+
+[node name="score" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 127.0
+offset_top = 100.0
+offset_right = -935.0
+offset_bottom = -458.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = SubResource("SystemFont_w5aja")
+theme_override_font_sizes/font_size = 70
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ground" type="TextureRect" parent="."]
+texture_repeat = 2
+offset_left = -39.0
+offset_top = 607.0
+offset_right = 1220.0
+offset_bottom = 719.0
+texture = ExtResource("2_onqr8")
+stretch_mode = 1
+
+[node name="background" type="TextureRect" parent="."]
+z_index = -5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -91.0
+offset_right = -351.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_ycayy")
+stretch_mode = 1
