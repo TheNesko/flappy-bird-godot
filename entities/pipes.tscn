@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_og227"]
 size = Vector2(20, 212)
 
-[node name="Pipes" type="CharacterBody2D"]
+[node name="Pipes" type="CharacterBody2D" groups=["Pipes"]]
 z_index = -1
 collision_layer = 2
 script = ExtResource("1_1gb0g")

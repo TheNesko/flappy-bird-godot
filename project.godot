@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="flappy bird"
-run/main_scene="uid://bjh6kh38ptpag"
+config/tags=PackedStringArray("production")
+run/main_scene="uid://7ma4iu0ff8ds"
 config/features=PackedStringArray("4.4", "Forward Plus")
+boot_splash/bg_color=Color(0.0223645, 0.0265191, 0.0254885, 1)
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="uid://e3vgs7skivep"
 
 [autoload]
 
@@ -23,6 +29,10 @@ Highscore="*res://scripts/highscore.gd"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
+
+[global_group]
+
+Pipes=""
 
 [input]
 

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cww5pf2dfmemw"]
+
+[ext_resource type="Script" uid="uid://dyqux6n52djhx" path="res://scripts/game_manager.gd" id="1_hwd4i"]
+[ext_resource type="PackedScene" uid="uid://bt3smdt44s7ia" path="res://entities/bird.tscn" id="2_glms7"]
+
+[node name="GameManager" type="Node2D"]
+script = ExtResource("1_hwd4i")
+
+[node name="Bird" parent="." instance=ExtResource("2_glms7")]
+unique_name_in_owner = true
+position = Vector2(172, 325)
+
+[node name="pipes_spawn" type="Marker2D" parent="."]
+position = Vector2(1278, 325)

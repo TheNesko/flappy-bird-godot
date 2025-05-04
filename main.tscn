@@ -1,0 +1,198 @@
+[gd_scene load_steps=14 format=3 uid="uid://7ma4iu0ff8ds"]
+
+[ext_resource type="PackedScene" uid="uid://cww5pf2dfmemw" path="res://scenes/game_manager.tscn" id="2_5vw27"]
+[ext_resource type="Theme" uid="uid://wxc8dhgkgqj1" path="res://UI/score_label.tres" id="2_272bh"]
+[ext_resource type="Shader" uid="uid://c500y6gfes6ja" path="res://ground_scroll.gdshader" id="3_5vw27"]
+[ext_resource type="Script" uid="uid://dho36ktj64443" path="res://scripts/UI.gd" id="3_kek77"]
+[ext_resource type="Texture2D" uid="uid://dlvv0x44abkly" path="res://sprites/base.png" id="4_kek77"]
+[ext_resource type="Texture2D" uid="uid://ci5rbnp1yw7vo" path="res://sprites/background-day.png" id="5_4c57u"]
+[ext_resource type="Theme" uid="uid://bmyvyn08kv141" path="res://UI/Start_game_label.tres" id="6_efxa6"]
+[ext_resource type="Theme" uid="uid://drmpgc8rvtva8" path="res://UI/death_screen.tres" id="7_dg77c"]
+[ext_resource type="Texture2D" uid="uid://bkeurq5lxk1g2" path="res://sprites/idk.png" id="8_dg77c"]
+[ext_resource type="Theme" uid="uid://iy261ihf2gxk" path="res://UI/title_label.tres" id="8_kek77"]
+[ext_resource type="AudioStream" uid="uid://dr3ildcpq0oui" path="res://audio/bip.wav" id="10_4c57u"]
+[ext_resource type="Theme" uid="uid://p7y7cd87a4vg" path="res://UI/author_label.tres" id="11_ycdy4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg77c"]
+shader = ExtResource("3_5vw27")
+shader_parameter/paused = true
+shader_parameter/speed = 0.9
+
+[node name="Main" type="Node2D"]
+
+[node name="GameManager" parent="." instance=ExtResource("2_5vw27")]
+unique_name_in_owner = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_kek77")
+
+[node name="background" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ground" type="TextureRect" parent="CanvasLayer/background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_dg77c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 608.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_kek77")
+stretch_mode = 1
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="CanvasLayer/background"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="CanvasLayer/background/ParallaxBackground"]
+motion_mirroring = Vector2(1000, 0)
+
+[node name="ParalaxTexture" type="TextureRect" parent="CanvasLayer/background/ParallaxBackground/ParallaxLayer"]
+z_index = -5
+offset_left = -79.0
+offset_top = -8.0
+offset_right = 857.0
+offset_bottom = 524.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_4c57u")
+stretch_mode = 1
+
+[node name="Game_UI" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="score" type="Label" parent="CanvasLayer/Game_UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.134
+anchor_top = 0.452
+anchor_right = 0.134
+anchor_bottom = 0.452
+offset_left = 36.48
+offset_top = -177.44
+offset_right = 136.48
+offset_bottom = -30.44
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_272bh")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="final_screen" type="TextureRect" parent="CanvasLayer/Game_UI"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_dg77c")
+texture = ExtResource("8_dg77c")
+
+[node name="container" type="VBoxContainer" parent="CanvasLayer/Game_UI/final_screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 26.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="score" type="Label" parent="CanvasLayer/Game_UI/final_screen/container"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "score
+69"
+horizontal_alignment = 1
+
+[node name="best_score" type="Label" parent="CanvasLayer/Game_UI/final_screen/container"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "highscore
+69"
+horizontal_alignment = 1
+
+[node name="Menu_UI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="press_to_start" type="RichTextLabel" parent="CanvasLayer/Menu_UI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = -56.0
+offset_right = 364.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_efxa6")
+bbcode_enabled = true
+text = "[wave amp=20 freq=10]Press space to start[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="CanvasLayer/Menu_UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = -328.0
+offset_right = 217.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_kek77")
+text = "Flappy Bird 
+Godot Recreation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Author" type="Label" parent="CanvasLayer/Menu_UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("11_ycdy4")
+text = "Made by CursedDrunkard"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/Menu_UI"]
+stream = ExtResource("10_4c57u")
+volume_db = -5.0

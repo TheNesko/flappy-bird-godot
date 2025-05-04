@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://p7y7cd87a4vg"]
+
+[ext_resource type="FontFile" uid="uid://cvamqs37xkcbq" path="res://UI/Pixeled.ttf" id="1_a6uwr"]
+
+[resource]
+Label/constants/outline_size = 5
+Label/font_sizes/font_size = 10
+Label/fonts/font = ExtResource("1_a6uwr")
